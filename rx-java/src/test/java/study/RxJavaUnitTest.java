@@ -1,23 +1,48 @@
 package study;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class RxJavaUnitTest {
-    String result="";
-
     @Test
     public void returnAValue(){
-        Observable<String> observer = Observable.just("Hello"); // provides datea
-        observer.subscribe(s -> result=s); // Callable as subscriber
-        assertTrue(result.equals("Hello"));
+        Observable<String> observable = Observable.just("how", "to", "do", "in", "java");
+        observable.map(w -> w.toUpperCase()).subscribe(System.out::println);
     }
+    
+    @Test
+	public void observer() throws Exception {
+    	Observable<String> observable = Observable.just("how", "to", "do", "in", "java");
+    	
+    	Observer<String> observer = new Observer<String>() {
+			@Override
+			public void onSubscribe(Disposable d) {
+				
+			}
+
+			@Override
+			public void onNext(String word) {
+				System.out.println("word : " + word);
+			}
+
+			@Override
+			public void onError(Throwable e) {
+				
+			}
+
+			@Override
+			public void onComplete() {
+			}
+    		
+    	};
+    	observable.map(w -> w.toUpperCase()).subscribe(observer);
+	}
     
     @Test
     public void helloWorld() throws Exception {
