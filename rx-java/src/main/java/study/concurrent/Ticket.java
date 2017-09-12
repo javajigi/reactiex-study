@@ -11,6 +11,10 @@ public class Ticket {
         this.flight = flight;
         this.passenger = passenger;
     }
+    
+    public boolean hasError() {
+        return flight.hasError();
+    }
 
     @Override
     public String toString() {

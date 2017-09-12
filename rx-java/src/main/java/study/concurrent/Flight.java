@@ -6,6 +6,10 @@ public class Flight {
     public Flight(String flightNo) {
         this.flightNo = flightNo;
     }
+    
+    public boolean hasError() {
+        return flightNo.contains("error");
+    }
 
     @Override
     public String toString() {

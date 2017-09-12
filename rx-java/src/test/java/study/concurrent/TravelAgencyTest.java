@@ -52,6 +52,7 @@ public class TravelAgencyTest {
     public void sendEmails() throws Exception {
         List<Ticket> tickets = Arrays.asList(
                 new Ticket(new Flight("abc 104"), new Passenger(1L)), 
+                new Ticket(new Flight("error 243"), new Passenger(3L)), 
                 new Ticket(new Flight("gde 284"), new Passenger(2L)));
         TravelAgency ta = new TravelAgency();
         ta.sendEmails(tickets);

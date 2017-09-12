@@ -53,6 +53,10 @@ public class TravelAgency {
     }
     
     SmtpResponse sendEmail(Ticket ticket) {
+        if (ticket.hasError()) {
+            throw new IllegalArgumentException("error가 발생한 ticket입니다.");
+        }
+        
         return new SmtpResponse();
     }
     
