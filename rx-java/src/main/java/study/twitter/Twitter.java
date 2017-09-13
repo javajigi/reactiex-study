@@ -12,7 +12,7 @@ import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 
 public class Twitter {
-    Observable<Status> observe() {
+    public Observable<Status> observe() {
         return Observable.create(s -> {
             System.out.println("Created");
             TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
@@ -63,7 +63,7 @@ public class Twitter {
         });
     }
     
-    void consume(Consumer<Status> onStatus, Consumer<Exception> onException) throws InterruptedException {
+    public void consume(Consumer<Status> onStatus, Consumer<Exception> onException) {
         TwitterStream twitterStream = new TwitterStreamFactory().getInstance();
         twitterStream.addListener(new StatusListener() {
             
@@ -99,7 +99,6 @@ public class Twitter {
         });
         
         twitterStream.sample();
-        TimeUnit.SECONDS.sleep(10);
         twitterStream.shutdown();
     }
 
