@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 
-import io.reactivex.disposables.Disposable;
+import rx.Subscription;
 
 public class TwitterTest {
     int count = 0;
@@ -29,7 +29,7 @@ public class TwitterTest {
     public void observe() throws Exception {
         Twitter twitter = new Twitter();
         
-        Disposable disposable = twitter.observe().subscribe(status -> {
+        Subscription subscription = twitter.observe().subscribe(status -> {
             System.out.println("Status : " + status);
         }, ex -> {
             System.out.println("Exception : " + ex.getMessage());
@@ -38,7 +38,7 @@ public class TwitterTest {
         });
      
         TimeUnit.SECONDS.sleep(2);
-        disposable.dispose();
+        subscription.unsubscribe();
         TimeUnit.SECONDS.sleep(2);
     }
 }

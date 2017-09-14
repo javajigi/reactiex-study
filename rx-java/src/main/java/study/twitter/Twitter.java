@@ -3,7 +3,7 @@ package study.twitter;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-import io.reactivex.Observable;
+import rx.Observable;
 import twitter4j.StallWarning;
 import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
@@ -20,8 +20,8 @@ public class Twitter {
                 
                 @Override
                 public void onException(Exception ex) {
-                    if (s.isDisposed()) {
-                        System.out.println("ex disposed shutdown");
+                    if (s.isUnsubscribed()) {
+                        System.out.println("onException");
                         twitterStream.shutdown();
                     } else {
                         s.onError(ex);
@@ -35,8 +35,8 @@ public class Twitter {
                 
                 @Override
                 public void onStatus(Status status) {
-                    if (s.isDisposed()) {
-                        System.out.println("next disposed shutdown");
+                    if (s.isUnsubscribed()) {
+                        System.out.println("onException");
                         twitterStream.shutdown();
                     } else {
                         s.onNext(status);
