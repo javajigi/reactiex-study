@@ -3,6 +3,7 @@
 .project
 .settings/
 bin/
+out/
 build/
 .idea/
 /target/
